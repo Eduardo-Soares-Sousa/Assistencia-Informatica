@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+C:\Users\Usuario\Desktop\exercicio1-assistencia\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1226423630.index
+\assistenciaInfo\src\main\java
