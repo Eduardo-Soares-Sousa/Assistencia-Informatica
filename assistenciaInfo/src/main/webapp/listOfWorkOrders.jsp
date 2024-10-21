@@ -57,6 +57,7 @@
             <a href="home.jsp">Home</a>
             <a href="listOfClient">Service</a>
             <a href="workOrderListManager">Order List</a>
+            <a href="clientList">Client List</a>
             <a href="#">About</a>
             <a href="#">Contact us</a>
             <button class="btn-login">Login</button>

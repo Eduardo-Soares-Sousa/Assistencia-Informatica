@@ -89,7 +89,7 @@ public class ClienteDao {
 	}
 
 	public List<Cliente> getAllClientes() {
-		String sql = "select codigo, nome, email, telefone, cpf from cliente";
+		String sql = "select codigo,nome,email,telefone,cpf from cliente";
 		List<Cliente> clientes = new ArrayList<>();
 
 		try (Connection connection = dataSource.getConnection();
@@ -107,7 +107,29 @@ public class ClienteDao {
 					clientes.add(cliente);
 				}
 			}
-		} catch (SQLException e) {
+		}catch (SQLException e){
+			throw new RuntimeException("Erro durante a consulta no BD", e);
+		}
+		return clientes;
+	}
+
+	public List<Cliente> getAllClientesByNameAndId() {
+		List<Cliente> clientes = new ArrayList<>();
+		String sql = "select codigo,nome from cliente where codigo=?";
+
+		try(Connection connection = dataSource.getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql)){
+
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()){
+					Cliente cliente = new Cliente();
+					cliente.setCodigo(rs.getLong("codigo"));
+					cliente.setNome(rs.getString("nome"));
+
+					clientes.add(cliente);
+				}
+			}
+		}catch(SQLException e){
 			throw new RuntimeException("Erro durante a consulta no BD", e);
 		}
 		return clientes;

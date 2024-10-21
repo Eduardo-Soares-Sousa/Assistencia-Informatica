@@ -1,9 +1,7 @@
 package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.servlets;
 
-import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Cliente;
-import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.PaymentMethod;
-import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.ServiceOrder;
-import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Status;
+import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.*;
+import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ClienteDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ServiceOrderDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.utils.DataSourceSearcher;
 import jakarta.servlet.ServletException;
@@ -15,6 +13,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/updateServiceOrder")
 public class UpdateServiceOrderServlet extends HttpServlet {
@@ -30,6 +30,10 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         ServiceOrderDao serviceOrderDao = new ServiceOrderDao(DataSourceSearcher.getInstance().getDataSource());
         ServiceOrder serviceOrder = serviceOrderDao.getServiceById(codigo);
         request.setAttribute("service", serviceOrder);
+
+        ClienteDao clienteDao = new ClienteDao(DataSourceSearcher.getInstance().getDataSource());
+        List<Cliente> clientes = clienteDao.getAllClientes();
+        request.setAttribute("clientes", clientes);
 
         String url = "/updateServiceOrder.jsp";
 
@@ -47,11 +51,18 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         Double valor = Double.parseDouble(request.getParameter("valor"));
         Long formaPagamentoCode = Long.parseLong(request.getParameter("formaPagamento"));
         PaymentMethod formaPagamento = PaymentMethod.fromCode(formaPagamentoCode);
+        Long clienteId = Long.parseLong(request.getParameter("clienteId"));
         String observacao = request.getParameter("observacao");
         Status status = Status.valueOf(request.getParameter("status"));
         HttpSession session = request.getSession(false);
 
-        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        Employee employee = (Employee) session.getAttribute("employee");
+
+        ClienteDao clienteDao = new ClienteDao(DataSourceSearcher.getInstance().getDataSource());
+        clienteDao.getClienteById(clienteId);
+        Optional<Cliente> optional = clienteDao.getClienteById(clienteId);
+        Cliente cliente = optional.get();
+
         ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setCodigo(codigo);
         serviceOrder.setDescricao(descricao);

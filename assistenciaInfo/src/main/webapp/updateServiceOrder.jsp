@@ -109,6 +109,7 @@ body{
             <a href="home.jsp">Home</a>
             <a href="service.jsp">Service</a>
             <a href="workOrderListManager">Order List</a>
+            <a href="clientList">Client List</a>
             <a href="#">About</a>
             <a href="#">Contact us</a>
             <button class="btn-login">Login</button>
@@ -153,17 +154,27 @@ body{
                 </div>
                 <div class="input-box select">
                     <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
+                    <select class="select-payment" name="clienteId" id="clienteId" required>
+                        <option value="">Selecione um cliente</option>
+                        <c:forEach var="cliente" items="${clientes}">
+                            <option value="${cliente.codigo}" <c:if test="${cliente.codigo == service.cliente.codigo}">selected</c:if>>${cliente.nome}</option>
+                        </c:forEach>
+                    </select> <span id="6"></span>
+                    <label class="label-payment" for="formaPagamento">Forma de Pagamento*</label>
+                </div>
+                <div class="input-box select">
+                    <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
                     <select class="select-payment" name="status" id="status" required value="${service.status}>
                         <option value="EMAPROVACAO" <c:if test="${service.status == 'EMAPROVACAO'}">selected</c:if>>Em aprovação</option>
                         <option value="APROVADA" <c:if test="${service.status == 'APROVADA'}">selected</c:if>>Aprovada</option>
                         <option value="EMANDAMENTO" <c:if test="${service.status == 'EMANDAMENTO'}">selected</c:if>>Em andamento</option>
                         <option value="FINALIZADA" <c:if test="${service.status == 'FINALIZADA'}">selected</c:if>>Finalizada</option>
-                    </select> <span id="6"></span>
+                    </select> <span id="7"></span>
                     <label class="label-payment" for="status">Status do serviço*</label>
                 </div>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="text-outline"></ion-icon></span>
-                    <input type="text" name="observacao" id="observacao" minlength="0" maxlength="100" value="${service.observacao}"> <span id="7"></span>
+                    <input type="text" name="observacao" id="observacao" minlength="0" maxlength="100" value="${service.observacao}"> <span id="8"></span>
                     <label for="observacao">Observação*</label>
                 </div>
                 <button type="submit" class="btn">Salvar</button>

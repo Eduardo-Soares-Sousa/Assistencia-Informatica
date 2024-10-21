@@ -2,10 +2,8 @@ package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.servlets;
 
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Cliente;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Employee;
-import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.ServiceOrder;
-import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ServiceOrderDao;
+import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ClienteDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.utils.DataSourceSearcher;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,13 +11,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/workOrderListManager")
-public class WorkOrderListManagerServlet extends HttpServlet {
+@WebServlet("/clientList")
+public class ClientListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public WorkOrderListManagerServlet() {
+    public ClientListServlet() {
         super();
     }
 
@@ -28,16 +27,14 @@ public class WorkOrderListManagerServlet extends HttpServlet {
         Employee employee = (Employee) request.getSession().getAttribute("funcionarioLogado");
 
         if(employee != null){
-            ServiceOrderDao serviceOrderDao = new ServiceOrderDao(DataSourceSearcher.getInstance().getDataSource());
-            List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceByFuncionario(employee);
-            request.setAttribute("serviceOrders", serviceOrders);
-        } else {
-            ServiceOrderDao serviceOrderDao = new ServiceOrderDao(DataSourceSearcher.getInstance().getDataSource());
-            List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceOrder();
-            request.setAttribute("serviceOrders", serviceOrders);
+            ClienteDao clienteDao = new ClienteDao(DataSourceSearcher.getInstance().getDataSource());
+            List<Cliente> clientes = clienteDao.getAllClientes();
+            request.setAttribute("clientes", clientes);
+        }else{
+            request.setAttribute("clientes", new ArrayList<Cliente>());
         }
 
-        String url = "/listOfWorkOrders.jsp";
+        String url = "/listOfClient.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -46,3 +43,9 @@ public class WorkOrderListManagerServlet extends HttpServlet {
         doGet(request, response);
     }
 }
+
+
+
+
+
+

@@ -6,7 +6,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/home.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -86,7 +85,7 @@ header{
     transform: scaleX(1);
 }
 
-.navegation .btn-login{
+.navegation .btnLogin-popup{
     margin-left: 40px;
     font-size: 1.1em;
     font-weight: 500;
@@ -101,7 +100,7 @@ header{
     transition: .5s;
 }
 
-.navegation .btn-login:hover{
+.navegation .btnLogin-popup:hover{
     background: white;
     color: #162938;
 }
@@ -184,7 +183,7 @@ header{
     position: relative;
     width: 100%;
     height: 50px;
-    border-bottom: 2px solid ##fff;
+    border-bottom: 2px solid #fff;
     margin: 30px 0;
 }
 
@@ -324,7 +323,7 @@ header{
             <a href="registerEmployee.jsp">Home</a>
             <a href="#">About</a>
             <a href="#">Contact us</a>
-            <button class="btn-login">Login</button>
+            <button class="btnLogin-popup" id="btnLogin">Login</button>
         </nav>
     </header>
 
@@ -390,11 +389,33 @@ header{
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script type="text/javascript" src="js/home.js"></script>
 <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous">
+</script>
+<script>
+    const wrapper = document.querySelector('.wrapper');
+    const loginLink = document.querySelector('.login-link');
+    const registerLink = document.querySelector('.register-link');
+    const btnPopup = document.querySelector('.btnLogin-popup');
+    const iconClose = document.querySelector('.icon-close');
+
+    registerLink.addEventListener('click', ()=> {
+        wrapper.classList.add('active');
+    });
+
+    loginLink.addEventListener('click', ()=> {
+        wrapper.classList.remove('active');
+    });
+
+    btnPopup.addEventListener('click', ()=> {
+        wrapper.classList.add('active-popup');
+    });
+
+    iconClose.addEventListener('click', ()=> {
+        wrapper.classList.remove('active-popup');
+    });
 </script>
 </body>
 </html>

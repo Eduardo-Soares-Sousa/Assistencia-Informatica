@@ -94,7 +94,7 @@ public class ServiceOrderDao {
         }
     }
 
-    public boolean updateService(ServiceOrder serviceOrder){
+    public boolean updateService(ServiceOrder serviceOrder) {
         String sql = "update service set "
                 + "descricao=?,"
                 + "dataEmissao=?,"
@@ -174,7 +174,7 @@ public class ServiceOrderDao {
     }
 
     public List<ServiceOrder> getServiceByFuncionario(Employee funcionario) {
-        String sql = "select * from service where funcionario_codigo = ?";
+        String sql = "select * from service where funcionario_id = ?";
         List<ServiceOrder> orders = new ArrayList<>();
 
         try(Connection connection = dataSource.getConnection();

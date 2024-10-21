@@ -34,7 +34,7 @@ public class LoginEmployeeServlet extends HttpServlet {
             Employee employee = optional.get();
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(600);
-            session.setAttribute("employee", employee);
+            session.setAttribute("funcionarioLogado", employee);
             url = "/homeSession";
         }else{
             request.setAttribute("result", "loginError");

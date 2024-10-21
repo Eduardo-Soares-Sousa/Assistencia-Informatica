@@ -57,6 +57,7 @@
             <a href="home.jsp">Home</a>
             <a href="listOfClient">Service</a>
             <a href="workOrderListManager">Order List</a>
+            <a href="clientList">Client List</a>
             <a href="#">About</a>
             <a href="#">Contact us</a>
             <button class="btn-login">Login</button>
@@ -73,23 +74,25 @@
                     <th scope="col">CPF</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
 
             <tbody>
-      	        <c:if test="${not empty serviceOrders}">
-    		        <c:forEach var="client" items="${serviceOrders}">
+                <c:if test="${empty clientes}">
+                    <tr>
+                        <td colspan="10">Nenhum cliente encontrado.</td>
+                    </tr>
+                </c:if>
+      	        <c:if test="${not empty clientes}">
+    		        <c:forEach var="client" items="${clientes}">
     		            <tr>
     		                <th scope="row">${client.codigo}</th>
     		                <td>${client.nome}</td>
     		                <td>${client.email}</td>
     		                <td>${client.telefone}</td>
     		                <td>${client.cpf}</td>
-    		                <td><a href="deleteServiceOrder?codigo=${order.codigo}" class="btn btn-danger"> Excluir </a></td>
-          		            <td><a href="updateServiceOrder?codigo=${order.codigo}" class="btn btn-warning"> Editar </a></td>
+    		                <td><a href="deleteClient?codigo=${client.codigo}" class="btn btn-danger"> Excluir </a></td>
+          		            <td><a href="updateClient?codigo=${client.codigo}" class="btn btn-warning"> Editar </a></td>
     		            </tr>
     		        </c:forEach>
     	        </c:if>

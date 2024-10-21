@@ -294,7 +294,7 @@ header{
         <c:choose>
             <c:when test="${result == 'registered'}">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Usuário cadastrado com sucesso.
+                    Cliente cadastrado com sucesso.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </c:when>
@@ -324,6 +324,7 @@ header{
             <a href="home.jsp">Home</a>
             <a href="listOfClient">Service</a>
             <a href="workOrderListManager">Order List</a>
+            <a href="clientList">Client List</a>
             <a href="#">About</a>
             <a href="#">Contact us</a>
             <button class="btn-login" onclick="registerForm()">Register</button>
@@ -388,7 +389,7 @@ header{
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
-                        <input type="text" name="complemento" id="complemento" required>
+                        <input type="text" name="complemento" id="complemento">
                         <label for="complemento">Complemento*</label>
                     </div>
                     <div class="input-box">
@@ -420,7 +421,6 @@ header{
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script type="text/javascript" src="js/home.js"></script>
 <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
