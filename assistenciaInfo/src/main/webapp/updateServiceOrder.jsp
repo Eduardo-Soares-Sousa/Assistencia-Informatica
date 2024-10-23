@@ -76,6 +76,13 @@ body{
     height: 720px;
 }
 
+.form-box.register {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
 .alerts-container {
     position: absolute;
     top: 0;
@@ -107,7 +114,7 @@ body{
         <h2 class="logo">Logo</h2>
         <nav class="navegation">
             <a href="home.jsp">Home</a>
-            <a href="service.jsp">Service</a>
+            <a href="serviceOrder">Service</a>
             <a href="workOrderListManager">Order List</a>
             <a href="clientList">Client List</a>
             <a href="#">About</a>
@@ -164,7 +171,7 @@ body{
                 </div>
                 <div class="input-box select">
                     <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
-                    <select class="select-payment" name="status" id="status" required value="${service.status}>
+                    <select class="select-payment" name="status" id="status" required value="${service.status}">
                         <option value="EMAPROVACAO" <c:if test="${service.status == 'EMAPROVACAO'}">selected</c:if>>Em aprovação</option>
                         <option value="APROVADA" <c:if test="${service.status == 'APROVADA'}">selected</c:if>>Aprovada</option>
                         <option value="EMANDAMENTO" <c:if test="${service.status == 'EMANDAMENTO'}">selected</c:if>>Em andamento</option>

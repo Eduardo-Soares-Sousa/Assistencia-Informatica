@@ -27,7 +27,12 @@ public class ServiceOrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ClienteDao clienteDao = new ClienteDao(DataSourceSearcher.getInstance().getDataSource());
+        List<Cliente> clientes = clienteDao.getAllClientesByName();
+        request.setAttribute("clientes", clientes);
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("service.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class ServiceOrderServlet extends HttpServlet {
         Status status = Status.valueOf(request.getParameter("status"));
         HttpSession session = request.getSession(false);
 
-        Employee employee = (Employee) session.getAttribute("employee");
+        Employee employee = (Employee) session.getAttribute("funcionarioLogado");
 
         ClienteDao clienteDao = new ClienteDao(DataSourceSearcher.getInstance().getDataSource());
         clienteDao.getClienteById(clienteId);

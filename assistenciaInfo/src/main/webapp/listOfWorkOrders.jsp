@@ -55,7 +55,7 @@
         <h2 class="logo">Logo</h2>
         <nav class="navegation">
             <a href="home.jsp">Home</a>
-            <a href="listOfClient">Service</a>
+            <a href="serviceOrder">Service</a>
             <a href="workOrderListManager">Order List</a>
             <a href="clientList">Client List</a>
             <a href="#">About</a>

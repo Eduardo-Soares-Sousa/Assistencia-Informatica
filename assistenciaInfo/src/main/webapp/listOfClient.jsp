@@ -12,7 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-<title>Lista de Ordem de serviço - ITech.com</title>
+<title>Lista de Clientes Cadastrados - ITech.com</title>
 <style>
     body{
         background: url('img/teste1.jpg') no-repeat;
@@ -55,7 +55,7 @@
         <h2 class="logo">Logo</h2>
         <nav class="navegation">
             <a href="home.jsp">Home</a>
-            <a href="listOfClient">Service</a>
+            <a href="serviceOrder">Service</a>
             <a href="workOrderListManager">Order List</a>
             <a href="clientList">Client List</a>
             <a href="#">About</a>

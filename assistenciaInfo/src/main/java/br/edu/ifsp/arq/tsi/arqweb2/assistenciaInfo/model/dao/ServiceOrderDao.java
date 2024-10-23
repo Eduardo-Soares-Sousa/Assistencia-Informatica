@@ -139,8 +139,8 @@ public class ServiceOrderDao {
     }
 
     public List<ServiceOrder> getServiceOrder() {
-        String sql = "select s.*, c.nome AS cliente_nome from service s "
-                    + "join cliente c on s.cliente_id = c.codigo order by s.dataEmissao";
+        String sql = "SELECT s.*, c.nome AS cliente_nome FROM service s "
+                    + "JOIN cliente c ON s.cliente_id = c.codigo ORDER BY s.dataEmissao";
         List<ServiceOrder> serviceOrders = new ArrayList<>();
 
         try(Connection connection = dataSource.getConnection();

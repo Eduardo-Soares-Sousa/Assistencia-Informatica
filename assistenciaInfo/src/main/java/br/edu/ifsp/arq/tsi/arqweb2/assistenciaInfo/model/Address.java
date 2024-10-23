@@ -1,6 +1,8 @@
 package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model;
 
 public class Address {
+
+    private Long codigo;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -8,6 +10,14 @@ public class Address {
     private String cep;
     private String cidade;
     private String estado;
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
 
     public String getLogradouro() {
         return logradouro;

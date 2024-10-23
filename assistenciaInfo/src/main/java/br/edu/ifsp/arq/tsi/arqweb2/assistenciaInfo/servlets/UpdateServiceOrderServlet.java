@@ -36,7 +36,6 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         request.setAttribute("clientes", clientes);
 
         String url = "/updateServiceOrder.jsp";
-
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 

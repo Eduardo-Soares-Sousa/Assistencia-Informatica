@@ -63,7 +63,3 @@ SELECT * FROM endereco;
 SELECT * FROM formapagamento;
 SELECT * FROM service;
 
-SELECT * FROM service WHERE funcionario_id = 1;
-
-select s.*, c.nome AS cliente_nome from service s
-join cliente c on s.cliente_id = c.codigo order by s.dataEmissao;

@@ -12,7 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-<title>ITech.com</title>
+<title>Atualização de Cliente</title>
 <style>
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
@@ -31,7 +31,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('img/teste2.jpg') no-repeat;
+    background: url('img/teste4.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -123,12 +123,9 @@ header{
     transition: transform .5s ease, height .2s ease;
 }
 
-.wrapper.active-popup{
-    transform: scale(1);
-}
-
 .wrapper.active{
     height: 650px;
+    transform: scale(1);
 }
 
 .wrapper .form-box{
@@ -139,11 +136,6 @@ header{
 .wrapper .form-box.register{
     transition: transform .18s ease;
     transform: translateX(0);
-}
-
-.wrapper.active .form-box.register{
-    transition: none;
-    transform: translateX(-400px);
 }
 
 .wrapper .icon-close{
@@ -277,15 +269,18 @@ header{
     z-index: 100;
 }
 
-.btn.step1 {
-    margin-bottom: 20px;
-}
-
-.step2 {
-    max-height: 400px;
+.form-box.register {
+    max-height: 500px;
+    max-width: 350px;
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 20px;
+}
+
+.wrapper{
+    transition: opacity 0.5s ease;
+    top: 20px;
+    height: 720px;
 }
 </style>
 </head>
@@ -331,116 +326,105 @@ header{
         </nav>
 </header>
 
-    <div class="wrapper">
-        <span class="icon-close" onclick="registerForm()">
+    <div class="wrapper" id="wrapper">
+        <span class="icon-close" id="icon-close">
             <ion-icon name="close"></ion-icon>
         </span>
 
-        <div class="form-box register">
+        <div class="form-box register" id="form-box">
             <h2>Cadastro</h2>
-            <form action="registerClient" method="post">
-                <div id="step1">
+            <form action="updateClient" method="post">
+                <input type="hidden" name="codigo" value="${cliente.codigo}">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="person"></ion-icon></span>
-                        <input type="text" name="name" id="name" minlength="3" maxlength="50" required> <span id="0"></span>
+                        <input type="text" name="name" id="name" minlength="3" maxlength="50" required value="${cliente.nome}"> <span id="1"></span>
                         <label for="name">Nome Completo*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input type="email" name="email" id="email" required> <span id="1"></span>
+                        <input type="email" name="email" id="email" required value="${cliente.email}"> <span id="2"></span>
                         <label for="email">Email*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-                        <input type="text" name="phone" id="phone" required> <span id="2"></span>
+                        <input type="text" name="phone" id="phone" required value="${cliente.telefone}"> <span id="3"></span>
                         <label for="phone">Telefone*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="id-card-outline"></ion-icon></span>
-                        <input type="text" name="cpf" id="cpf" required> <span id="3"></span>
+                        <input type="text" name="cpf" id="cpf" required value="${cliente.cpf}"> <span id="4"></span>
                         <label for="cpf">CPF*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" name="password" id="password" required> <span id="4"></span>
+                        <input type="password" name="password" id="password" required value="${cliente.senha}"> <span id="5"></span>
                         <label for="password">Senha*</label>
                     </div>
-                    <div class="remember-forgot">
-                        <label><input type="checkbox">Eu concordo com os termos</label>
-                    </div>
-                    <button type="button" class="btn" onclick="goToStep2()">Avançar</button>
-                    <div class="login-register">
-                        <p>
-                            já tenho conta? <a href="#" class="login-link">Login</a>
-                        </p>
-                    </div>
-                </div>
-
-                <div id="step2" class="step2" style="display:none;">
+                    <input type="hidden" name="addressCodigo" value="${cliente.address.codigo}">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
-                        <input type="text" name="logradouro" id="logradouro" required>
+                        <input type="text" name="logradouro" id="logradouro" required value="${cliente.address.logradouro}">
                         <label for="logradouro">Logradouro*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
-                        <input type="text" name="numero" id="numero" required>
+                        <input type="text" name="numero" id="numero" required value="${cliente.address.numero}">
                         <label for="numero">Número*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
-                        <input type="text" name="complemento" id="complemento">
+                        <input type="text" name="complemento" id="complemento" value="${cliente.address.complemento}">
                         <label for="complemento">Complemento*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
-                        <input type="text" name="bairro" id="bairro" required>
+                        <input type="text" name="bairro" id="bairro" required value="${cliente.address.bairro}">
                         <label for="bairro">Bairro*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
-                        <input type="text" name="cep" id="cep" required>
+                        <input type="text" name="cep" id="cep" required value="${cliente.address.cep}">
                         <label for="cep">CEP*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
-                        <input type="text" name="cidade" id="cidade" required>
+                        <input type="text" name="cidade" id="cidade" required value="${cliente.address.cidade}">
                         <label for="cidade">Cidade*</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="earth-outline"></ion-icon></span>
-                        <input type="text" name="estado" id="estado" required>
+                        <input type="text" name="estado" id="estado" required value="${cliente.address.estado}">
                         <label for="estado">Estado*</label>
                     </div>
-                    <button type="button" class="btn step1" onclick="backStep1()">Voltar</button>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox">Eu concordo com os termos</label>
+                    </div>
                     <button type="submit" class="btn">Cadastrar</button>
-                </div>
             </form>
         </div>
     </div>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous">
-</script>
-<script>
-    function registerForm() {
-        const wrapper = document.querySelector('.wrapper');
-        wrapper.classList.toggle('active-popup');
-    }
+    </script>
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('wrapper').classList.add('active');
+            }, 1000);
+        };
 
-    function goToStep2() {
-        document.getElementById("step1").style.display = "none";
-        document.getElementById("step2").style.display = "block";
-    }
+        document.getElementById('icon-close').onclick = function() {
+            document.getElementById('wrapper').classList.remove('active');
+        };
 
-    function backStep1() {
-        document.getElementById("step1").style.display = "block";
-        document.getElementById("step2").style.display = "none";
-    }
-</script>
+        function registerForm() {
+            document.getElementById('wrapper').classList.add('active');
+        }
+    </script>
 </body>
 </html>

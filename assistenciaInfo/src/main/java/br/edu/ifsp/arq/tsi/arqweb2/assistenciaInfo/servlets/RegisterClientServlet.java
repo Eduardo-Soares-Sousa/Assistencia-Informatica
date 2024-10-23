@@ -22,6 +22,8 @@ public class RegisterClientServlet extends HttpServlet {
         super();
     }
 
+
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nome = request.getParameter("name");
@@ -54,7 +56,7 @@ public class RegisterClientServlet extends HttpServlet {
 		cliente.setCpf(cpf);
 		cliente.setSenha(PasswordEncode.criptografarSenha(senha));
 		cliente.setAddress(address);
-		
+
 		RequestDispatcher dispatcher = null;
 		
 		ClienteDao clienteDao = new ClienteDao(DataSourceSearcher.getInstance().getDataSource());
@@ -62,7 +64,7 @@ public class RegisterClientServlet extends HttpServlet {
 		if(clienteDao.addCliente(cliente)) {
 			request.setAttribute("result", "registered");
 			dispatcher = request.getRequestDispatcher("/home.jsp");
-		}else {
+		}else{
 			request.setAttribute("result", "notRegistered");
 			dispatcher = request.getRequestDispatcher("/home.jsp");
 		}

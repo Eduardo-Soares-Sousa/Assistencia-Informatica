@@ -29,9 +29,9 @@ public class WorkOrderListManagerServlet extends HttpServlet {
 
         if(employee != null){
             ServiceOrderDao serviceOrderDao = new ServiceOrderDao(DataSourceSearcher.getInstance().getDataSource());
-            List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceByFuncionario(employee);
+            List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceOrder();
             request.setAttribute("serviceOrders", serviceOrders);
-        } else {
+        }else{
             ServiceOrderDao serviceOrderDao = new ServiceOrderDao(DataSourceSearcher.getInstance().getDataSource());
             List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceOrder();
             request.setAttribute("serviceOrders", serviceOrders);
