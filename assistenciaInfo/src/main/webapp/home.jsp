@@ -369,11 +369,6 @@ header{
                         <label><input type="checkbox">Eu concordo com os termos</label>
                     </div>
                     <button type="button" class="btn" onclick="goToStep2()">Avançar</button>
-                    <div class="login-register">
-                        <p>
-                            já tenho conta? <a href="#" class="login-link">Login</a>
-                        </p>
-                    </div>
                 </div>
 
                 <div id="step2" class="step2" style="display:none;">
