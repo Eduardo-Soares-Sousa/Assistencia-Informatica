@@ -84,7 +84,7 @@
             </thead>
 
             <tbody>
-                <c:if test="${empty clientes}">
+                <c:if test="${empty serviceOrders}">
                     <tr>
                         <td colspan="10">Nenhuma ordem de serviço encontrada.</td>
                     </tr>
