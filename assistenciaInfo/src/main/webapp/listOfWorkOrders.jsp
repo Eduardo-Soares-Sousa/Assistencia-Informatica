@@ -84,6 +84,11 @@
             </thead>
 
             <tbody>
+                <c:if test="${empty clientes}">
+                    <tr>
+                        <td colspan="10">Nenhuma ordem de serviço encontrada.</td>
+                    </tr>
+                </c:if>
       	        <c:if test="${not empty serviceOrders}">
     		        <c:forEach var="order" items="${serviceOrders}">
     		            <tr>
