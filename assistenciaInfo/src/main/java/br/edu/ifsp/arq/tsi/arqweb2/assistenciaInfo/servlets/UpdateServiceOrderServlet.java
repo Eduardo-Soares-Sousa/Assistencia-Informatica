@@ -2,6 +2,7 @@ package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.servlets;
 
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.*;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ClienteDao;
+import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.PaymentMethodDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ServiceOrderDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.utils.DataSourceSearcher;
 import jakarta.servlet.ServletException;
@@ -48,8 +49,7 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         LocalDate dataEmissao = LocalDate.parse(request.getParameter("dataEmissao"));
         LocalDate dataFinalizacao = LocalDate.parse(request.getParameter("dataFinalizacao"));
         Double valor = Double.parseDouble(request.getParameter("valor"));
-        Long formaPagamentoCode = Long.parseLong(request.getParameter("formaPagamento"));
-        PaymentMethod formaPagamento = PaymentMethod.fromCode(formaPagamentoCode);
+        Integer formaPagamentoId = Integer.parseInt(request.getParameter("formaPagamento"));
         Long clienteId = Long.parseLong(request.getParameter("clienteId"));
         String observacao = request.getParameter("observacao");
         Status status = Status.valueOf(request.getParameter("status"));
@@ -62,13 +62,17 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         Optional<Cliente> optional = clienteDao.getClienteById(clienteId);
         Cliente cliente = optional.get();
 
+        PaymentMethodDao paymentMethodDao = new PaymentMethodDao(DataSourceSearcher.getInstance().getDataSource());
+        Optional<PaymentMethod> optionalPaymentMethod = paymentMethodDao.getPaymentMethodById(formaPagamentoId);
+        PaymentMethod paymentMethod = optionalPaymentMethod.get();
+
         ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setCodigo(codigo);
         serviceOrder.setDescricao(descricao);
         serviceOrder.setDataEmissao(dataEmissao);
         serviceOrder.setDataFinalizacao(dataFinalizacao);
         serviceOrder.setValor(valor);
-        serviceOrder.setPaymentMethod(formaPagamento);
+        serviceOrder.setPaymentMethod(paymentMethod);
         serviceOrder.setObservacao(observacao);
         serviceOrder.setStatus(status);
         serviceOrder.setCliente(cliente);

@@ -16,7 +16,6 @@
 <style>
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 *{
     margin: 0;
     padding: 0;
@@ -86,7 +85,7 @@ header{
     transform: scaleX(1);
 }
 
-.navegation .btn-login{
+.navegation .btnLogin-popup{
     margin-left: 40px;
     font-size: 1.1em;
     font-weight: 500;
@@ -101,7 +100,7 @@ header{
     transition: .5s;
 }
 
-.navegation .btn-login:hover{
+.navegation .btnLogin-popup:hover{
     background: white;
     color: #162938;
 }
@@ -318,19 +317,7 @@ header{
             </div>
         </c:if>
 </div>
-<header>
-        <h2 class="logo">Logo</h2>
-        <nav class="navegation">
-            <a href="home.jsp">Home</a>
-            <a href="serviceOrder">Service</a>
-            <a href="workOrderListManager">Order List</a>
-            <a href="clientList">Client List</a>
-            <a href="#">About</a>
-            <a href="#">Contact us</a>
-            <button class="btn-login" onclick="registerForm()">Register</button>
-        </nav>
-</header>
-
+<jsp:include page="navbar.jsp"/>
     <div class="wrapper">
         <span class="icon-close" onclick="registerForm()">
             <ion-icon name="close"></ion-icon>

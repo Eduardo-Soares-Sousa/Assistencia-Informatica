@@ -109,20 +109,7 @@ body{
         </div>
     </c:if>
 </div>
-
-    <header>
-        <h2 class="logo">Logo</h2>
-        <nav class="navegation">
-            <a href="home.jsp">Home</a>
-            <a href="serviceOrder">Service</a>
-            <a href="workOrderListManager">Order List</a>
-            <a href="clientList">Client List</a>
-            <a href="#">About</a>
-            <a href="#">Contact us</a>
-            <button class="btn-login">Login</button>
-        </nav>
-    </header>
-
+    <jsp:include page="navbar.jsp"/>
     <div class="wrapper" id="wrapper">
         <span class="icon-close" id="icon-close">
             <ion-icon name="close"></ion-icon>
@@ -182,7 +169,7 @@ body{
                 <div class="input-box">
                     <span class="icon"><ion-icon name="text-outline"></ion-icon></span>
                     <input type="text" name="observacao" id="observacao" minlength="0" maxlength="100" value="${service.observacao}"> <span id="8"></span>
-                    <label for="observacao">Observação*</label>
+                    <label for="observacao">Observação</label>
                 </div>
                 <button type="submit" class="btn">Salvar</button>
             </form>

@@ -1,41 +1,36 @@
 package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model;
 
-public enum PaymentMethod {
-    AVISTA(1L, "Á vista"),
-    CARTAOCREDITO(2L, "Cartão de crédito"),
-    CARTAODEBITO(3L, "Cartão de débito"),
-    PIX(4L, "Pix");
+import java.util.Objects;
 
-    private Long code;
-    private String description;
+public class PaymentMethod {
+    private int codigo;
+    private String name;
 
-    private PaymentMethod(Long code, String description) {
-        this.code = code;
-        this.description = description;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public String getDescription() {
-        return description;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getName() {
+        return name;
     }
 
-    public Long getCode() {
-        return code;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCode(Long code) {
-        this.code = code;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaymentMethod that)) return false;
+        return getCodigo() == that.getCodigo() && Objects.equals(getName(), that.getName());
     }
 
-    public static PaymentMethod fromCode(Long code) {
-        for (PaymentMethod method : values()) {
-            if (method.getCode().equals(code)) {
-                return method;
-            }
-        }
-        throw new IllegalArgumentException("Invalid PaymentMethod code: " + code);
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCodigo(), getName());
     }
 }

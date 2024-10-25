@@ -25,14 +25,9 @@ CREATE TABLE cliente (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE formapagamento (
-	codigo BIGINT(20) PRIMARY KEY,
+	codigo BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO formapagamento (codigo, nome) VALUES (1, 'Á vista');
-INSERT INTO formapagamento (codigo, nome) VALUES (2, 'Cartão de crédito');
-INSERT INTO formapagamento (codigo, nome) VALUES (3, 'Cartão de débito');
-INSERT INTO formapagamento (codigo, nome) VALUES (4, 'Pix');
 
 CREATE TABLE funcionario (
 	codigo BIGINT(20) AUTO_INCREMENT PRIMARY KEY,

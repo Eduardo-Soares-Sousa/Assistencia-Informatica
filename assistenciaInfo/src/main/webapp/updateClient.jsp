@@ -313,19 +313,7 @@ header{
             </div>
         </c:if>
 </div>
-<header>
-        <h2 class="logo">Logo</h2>
-        <nav class="navegation">
-            <a href="home.jsp">Home</a>
-            <a href="serviceOrder">Service</a>
-            <a href="workOrderListManager">Order List</a>
-            <a href="clientList">Client List</a>
-            <a href="#">About</a>
-            <a href="#">Contact us</a>
-            <button class="btn-login" onclick="registerForm()">Register</button>
-        </nav>
-</header>
-
+    <jsp:include page="navbar.jsp"/>
     <div class="wrapper" id="wrapper">
         <span class="icon-close" id="icon-close">
             <ion-icon name="close"></ion-icon>
@@ -374,7 +362,7 @@ header{
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
                         <input type="text" name="complemento" id="complemento" value="${cliente.address.complemento}">
-                        <label for="complemento">Complemento*</label>
+                        <label for="complemento">Complemento</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="business-outline"></ion-icon></span>

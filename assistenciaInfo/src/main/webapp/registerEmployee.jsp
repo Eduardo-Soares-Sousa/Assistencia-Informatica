@@ -317,16 +317,15 @@ header{
             </div>
         </c:if>
 </div>
-<header>
+    <header>
         <h2 class="logo">Logo</h2>
         <nav class="navegation">
             <a href="registerEmployee.jsp">Home</a>
             <a href="#">About</a>
             <a href="#">Contact us</a>
-            <button class="btnLogin-popup" id="btnLogin">Login</button>
+            <button class="btnLogin-popup" onclick="registerForm()">Register</button>
         </nav>
     </header>
-
     <div class="wrapper">
         <span class="icon-close">
             <ion-icon name="close"></ion-icon>

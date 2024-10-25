@@ -41,6 +41,10 @@ public class ServiceOrder implements Serializable {
         this.dataEmissao = dataEmissao;
     }
 
+    public void setRuperarData() {
+        this.dataEmissao = LocalDate.now();
+    }
+
     public LocalDate getDataFinalizacao() {
         return dataFinalizacao;
     }
@@ -101,11 +105,11 @@ public class ServiceOrder implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ServiceOrder that)) return false;
-        return Double.compare(getValor(), that.getValor()) == 0 && Objects.equals(getCodigo(), that.getCodigo()) && Objects.equals(getDescricao(), that.getDescricao()) && Objects.equals(getDataEmissao(), that.getDataEmissao()) && Objects.equals(getDataFinalizacao(), that.getDataFinalizacao()) && Objects.equals(getObservacao(), that.getObservacao()) && getStatus() == that.getStatus() && getPaymentMethod() == that.getPaymentMethod();
+        return Objects.equals(getCodigo(), that.getCodigo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodigo(), getDescricao(), getDataEmissao(), getDataFinalizacao(), getValor(), getObservacao(), getStatus(), getPaymentMethod());
+        return Objects.hash(getCodigo());
     }
 }

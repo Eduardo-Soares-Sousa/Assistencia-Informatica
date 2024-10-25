@@ -2,6 +2,7 @@ package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.servlets;
 
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.*;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ClienteDao;
+import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.PaymentMethodDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ServiceOrderDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.utils.DataSourceSearcher;
 import jakarta.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,18 @@ public class ServiceOrderServlet extends HttpServlet {
         List<Cliente> clientes = clienteDao.getAllClientesByName();
         request.setAttribute("clientes", clientes);
 
+        LocalDate dataEmissaoAtual = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dataEmissaoString = dataEmissaoAtual.format(formatter);
+        request.setAttribute("dataEmissao", dataEmissaoString);
+
+        PaymentMethodDao paymentMethodDao = new PaymentMethodDao(DataSourceSearcher.getInstance().getDataSource());
+        List<PaymentMethod> paymentMethods = paymentMethodDao.getAllPaymentMethod();
+        request.setAttribute("paymentMethods", paymentMethods);
+
+        Status[] statuses = Status.values();
+        request.setAttribute("statuses", statuses);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("service.jsp");
         dispatcher.forward(request, response);
     }
@@ -44,11 +58,11 @@ public class ServiceOrderServlet extends HttpServlet {
         LocalDate dataEmissao = LocalDate.parse(request.getParameter("dataEmissao"));
         LocalDate dataFinalizacao = LocalDate.parse(request.getParameter("dataFinalizacao"));
         Double valor = Double.parseDouble(request.getParameter("valor"));
-        Long formaPagamentoCode = Long.parseLong(request.getParameter("formaPagamento"));
-        PaymentMethod formaPagamento = PaymentMethod.fromCode(formaPagamentoCode);
+        Integer formaPagamentoId = Integer.parseInt(request.getParameter("formaPagamento"));
         Long clienteId = Long.parseLong(request.getParameter("clienteId"));
         String observacao = request.getParameter("observacao");
-        Status status = Status.valueOf(request.getParameter("status"));
+        int statusCode = Integer.parseInt(request.getParameter("status"));
+        Status status = Status.fromCode(statusCode);
         HttpSession session = request.getSession(false);
 
         Employee employee = (Employee) session.getAttribute("funcionarioLogado");
@@ -58,12 +72,16 @@ public class ServiceOrderServlet extends HttpServlet {
         Optional<Cliente> optional = clienteDao.getClienteById(clienteId);
         Cliente cliente = optional.get();
 
+        PaymentMethodDao paymentMethodDao = new PaymentMethodDao(DataSourceSearcher.getInstance().getDataSource());
+        Optional<PaymentMethod> optionalPaymentMethod = paymentMethodDao.getPaymentMethodById(formaPagamentoId);
+        PaymentMethod paymentMethod = optionalPaymentMethod.get();
+
         ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setDescricao(descricao);
         serviceOrder.setDataEmissao(dataEmissao);
         serviceOrder.setDataFinalizacao(dataFinalizacao);
         serviceOrder.setValor(valor);
-        serviceOrder.setPaymentMethod(formaPagamento);
+        serviceOrder.setPaymentMethod(paymentMethod);
         serviceOrder.setCliente(cliente);
         serviceOrder.setObservacao(observacao);
         serviceOrder.setStatus(status);

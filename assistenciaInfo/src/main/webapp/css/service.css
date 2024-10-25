@@ -218,13 +218,11 @@ header{
     z-index: 100;
 }
 
-/* Estilizar o campo de data */
 input[type="date"] {
     padding-right: 20px;
     color: white;
 }
 
-/* Reposicionar o ícone do calendário no Chrome, Safari e Edge */
 input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     right: 10px;

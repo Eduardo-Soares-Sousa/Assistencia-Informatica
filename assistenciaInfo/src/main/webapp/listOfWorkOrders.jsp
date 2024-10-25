@@ -15,7 +15,7 @@
 <title>Lista de Ordem de serviço - ITech.com</title>
 <style>
     body{
-        background: url('img/teste1.jpg') no-repeat;
+        background: #201b2c;
         background-size: cover;
         background-position: center;
     }
@@ -34,6 +34,7 @@
 
     .container{
         max-height: 600px;
+        max-width: 1500px;
         overflow-y: auto;
     }
 
@@ -48,21 +49,30 @@
         color: #fff;
         background-color: inherit;
     }
+
+    .navegation .btnLogin-popup{
+        margin-left: 40px;
+        font-size: 1.1em;
+        font-weight: 500;
+        width: 130px;
+        height: 50px;
+        background: transparent;
+        border: 2px solid white;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+        transition: .5s;
+    }
+
+    .navegation .btnLogin-popup:hover{
+        background: white;
+        color: #162938;
+    }
 </style>
 </head>
 <body>
-    <header>
-        <h2 class="logo">Logo</h2>
-        <nav class="navegation">
-            <a href="home.jsp">Home</a>
-            <a href="serviceOrder">Service</a>
-            <a href="workOrderListManager">Order List</a>
-            <a href="clientList">Client List</a>
-            <a href="#">About</a>
-            <a href="#">Contact us</a>
-            <button class="btn-login">Login</button>
-        </nav>
-    </header>
+    <jsp:include page="navbar.jsp"/>
     <div class="container">
     	<table class="table table-striped">
             <thead>
@@ -97,8 +107,8 @@
     		                <td>${order.dataEmissao}</td>
     		                <td>${order.dataFinalizacao}</td>
     		                <td>${order.valor}</td>
-    		                <td>${order.paymentMethod}</td>
-    		                <td>${order.status}</td>
+    		                <td>${order.paymentMethod.name}</td>
+    		                <td>${order.status.description}</td>
     		                <td>${order.observacao}</td>
     		                <td>${order.cliente.codigo}</td>
     		                <td>${order.cliente.nome}</td>

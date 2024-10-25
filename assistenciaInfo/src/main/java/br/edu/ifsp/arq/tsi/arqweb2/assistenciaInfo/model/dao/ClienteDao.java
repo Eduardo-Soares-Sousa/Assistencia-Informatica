@@ -46,40 +46,6 @@ public class ClienteDao {
 		}
 	}
 
-	public Cliente getClientById(Long id) {
-		String sql = "select * from cliente where codigo=?";
-		Cliente cliente = null;
-		Address address = null;
-		try(Connection connection = dataSource.getConnection();
-			PreparedStatement ps = connection.prepareStatement(sql)){
-			ps.setLong(1, id);
-			try(ResultSet rs = ps.executeQuery()){
-				if(rs.next()){
-					cliente = new Cliente();
-					cliente.setCodigo(rs.getLong(1));
-					cliente.setNome(rs.getString(2));
-					cliente.setEmail(rs.getString(3));
-					cliente.setTelefone(rs.getString(4));
-					cliente.setCpf(rs.getString(5));
-
-					Address endereco = new Address();
-					endereco.setLogradouro(rs.getString(6));
-					endereco.setNumero(rs.getString(7));
-					endereco.setComplemento(rs.getString(8));
-					endereco.setBairro(rs.getString(9));
-					endereco.setCep(rs.getString(10));
-					endereco.setCidade(rs.getString(11));
-					endereco.setEstado(rs.getString(12));
-
-					cliente.setAddress(endereco);
-				}
-			}
-			return cliente;
-		}catch(SQLException e){
-			throw new RuntimeException("Erro durante a consulta no BD", e);
-		}
-	}
-
 	public Optional<Cliente> getClienteById(long id) {
 		String sql = "SELECT c.codigo, c.nome, c.email, c.telefone, c.cpf, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado "
 				+ "FROM cliente c JOIN endereco e ON c.endereco_id = e.codigo WHERE c.codigo=?";
@@ -150,6 +116,7 @@ public class ClienteDao {
 					Cliente cliente = new Cliente();
 					cliente.setCodigo(rs.getLong("codigo"));
 					cliente.setNome(rs.getString("nome"));
+
 					clientes.add(cliente);
 				}
 			}

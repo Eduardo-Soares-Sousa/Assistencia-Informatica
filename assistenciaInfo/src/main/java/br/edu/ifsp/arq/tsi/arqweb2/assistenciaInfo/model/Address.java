@@ -1,7 +1,6 @@
 package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model;
 
 public class Address {
-
     private Long codigo;
     private String logradouro;
     private String numero;

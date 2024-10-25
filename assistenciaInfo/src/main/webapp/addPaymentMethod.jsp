@@ -12,11 +12,11 @@
     	rel="stylesheet"
     	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
     	crossorigin="anonymous">
-    <title>Service Order - ITech.com</title>
+    <title>Adicionar Forma de Pagamento - ITech.com</title>
 </head>
 <style>
 body{
-    background: url('img/teste.jpg') no-repeat;
+    background: #201b2c;
     background-size: cover;
     background-position: center;
 }
@@ -71,16 +71,30 @@ body{
 }
 
 .wrapper{
-    transition: opacity 0.5s ease;
-    top: 20px;
-    height: 700px;
+    opacity: 0;
+    position: relative;
+    width: 400px;
+    height: 720px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.form-box.register {
-    max-height: 600px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 20px;
+
+.wrapper{
+    transition: opacity 0.5s ease;
+    top: 20px;
+    height: 300px;
+    width: 700px;
+}
+
+.wrapper.form-box{
+    max-width: 500px;
 }
 
 .alerts-container {
@@ -117,20 +131,13 @@ body{
 <div class="alerts-container">
     <c:if test="${result == 'notRegistered'}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    	    A <b>ordem de serviço</b> não foi salva. Verifique as credenciais.
+    	    Não foi possível salvar a forma de pagamento :(.
     		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     	</div>
     </c:if>
-    <c:if test="${result == 'loginFail'}">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Não há usuário logado, favor realizar o login.
-        	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </c:if>
-
     <c:if test="${result == 'registered'}">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-    	    <b>ordem de serviço</b> salva com sucesso.
+    	    Forma de pagamento salva com sucesso.
     		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </c:if>
@@ -149,64 +156,12 @@ body{
             <ion-icon name="close"></ion-icon>
         </span>
         <div class="form-box register">
-            <h2>Ordem de Serviço</h2>
-            <form action="serviceOrder" method="post">
+            <h2>Adicionar Método de Pagamento</h2>
+            <form action="registerPaymentMethod" method="post">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
-                    <input type="text" name="descricao" id="descricao" minlength="4" maxlength="100" required> <span id="1"></span>
-                    <label for="descricao">Descrição*</label>
-                </div>
-                <div class="input-box">
-                    <input type="date" name="dataEmissao" id="dataEmissao" value="${dataEmissao}" required> <span id="2"></span>
-                    <label for="dataEmissao">Data de emissão*</label>
-                </div>
-                <div class="input-box">
-                    <input type="date" name="dataFinalizacao" id="dataFinalizacao" required> <span id="3"></span>
-                    <label for="dataFinalizacao">Data de finalização*</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
-                    <input type="number" name="valor" id="valor" step="0.1" min="0.1" required> <span id="4"></span>
-                    <label for="valor">Valor*</label>
-                </div>
-                <div class="input-box select">
-                    <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
-                    <select class="select-payment" name="formaPagamento" id="formaPagamento" required>
-                        <option value="" selected>Selecione</option>
-                        <c:if test="${not empty paymentMethods}">
-                            <c:forEach var="method" items="${paymentMethods}">
-                                <option value="${method.codigo}">${method.name}</option>
-                            </c:forEach>
-                        </c:if>
-                    </select> <span id="5"></span>
-                    <label class="label-payment" for="formaPagamento">Forma de Pagamento*</label>
-                </div>
-                <div class="input-box select">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                    <select class="select-payment" name="clienteId" id="clienteId" required>
-                        <option value="" selected>Selecione um cliente</option>
-                        <c:if test="${not empty clientes}">
-                            <c:forEach var="cliente" items="${clientes}">
-                                <option value="${cliente.codigo}">${cliente.nome}</option>
-                            </c:forEach>
-                        </c:if>
-                    </select> <span id="6"></span>
-                    <label class="label-payment" for="clienteId">Cliente*</label>
-                </div>
-                <div class="input-box select">
-                    <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
-                    <select class="select-payment" name="status" id="status" required>
-                        <option value="" selected>Selecione</option>
-                        <c:forEach var="status" items="${statuses}">
-                            <option value="${status.code}">${status.description}</option>
-                        </c:forEach>
-                    </select> <span id="7"></span>
-                    <label class="label-payment" for="status">Status do serviço*</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="text-outline"></ion-icon></span>
-                    <input type="text" name="observacao" id="observacao" minlength="0" maxlength="100"> <span id="8"></span>
-                    <label for="observacao">Observação</label>
+                    <input type="text" name="method" id="method" minlength="2" maxlength="100" required> <span id="1"></span>
+                    <label for="method">Novo método*</label>
                 </div>
                 <button type="submit" class="btn">Salvar</button>
             </form>
