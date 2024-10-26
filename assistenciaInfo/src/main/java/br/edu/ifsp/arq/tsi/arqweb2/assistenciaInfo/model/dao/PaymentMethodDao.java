@@ -72,4 +72,19 @@ public class PaymentMethodDao {
         }
         return Optional.empty();
     }
+
+    public boolean deletePaymentMethod(PaymentMethod paymentMethod) {
+        String sql = "delete from formapagamento where codigo=?";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setLong(1, paymentMethod.getCodigo());
+            ps.executeUpdate();
+
+            return true;
+        }catch(SQLException e){
+            throw new RuntimeException("Erro durante a consulta no BD", e);
+        }
+    }
+
+
 }

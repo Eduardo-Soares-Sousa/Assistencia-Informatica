@@ -5,8 +5,7 @@
             <a href="serviceOrder">Service</a>
             <a href="workOrderListManager">Order List</a>
             <a href="clientList">Client List</a>
-            <a href="addPaymentMethod.jsp">Add Payment Mathod</a>
-            <a href="#">Contact us</a>
+            <a href="paymentMethod">Payment Method</a>
             <button class="btnLogin-popup" onclick="registerForm()">Register</button>
         </nav>
 </header>

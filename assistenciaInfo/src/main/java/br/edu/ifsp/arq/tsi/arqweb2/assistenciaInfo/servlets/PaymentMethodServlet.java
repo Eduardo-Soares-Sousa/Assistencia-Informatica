@@ -11,13 +11,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet("/registerPaymentMethod")
-public class RegisterPaymentMethodServlet extends HttpServlet {
+@WebServlet("/paymentMethod")
+public class PaymentMethodServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public RegisterPaymentMethodServlet() {
+    public PaymentMethodServlet() {
         super();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PaymentMethodDao paymentMethodDao = new PaymentMethodDao(DataSourceSearcher.getInstance().getDataSource());
+        List<PaymentMethod> paymentMethods = paymentMethodDao.getAllPaymentMethod();
+
+        request.setAttribute("paymentMethods", paymentMethods);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("addPaymentMethod.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
@@ -33,11 +44,10 @@ public class RegisterPaymentMethodServlet extends HttpServlet {
 
         if(paymentMethodDao.addPaymentMethod(paymentMethod)){
             request.setAttribute("result", "registered");
-            dispatcher = request.getRequestDispatcher("/addPaymentMethod.jsp");
         }else{
             request.setAttribute("result", "notRegistered");
-            dispatcher = request.getRequestDispatcher("/addPaymentMethod.jsp");
         }
-        dispatcher.forward(request, response);
+
+        response.sendRedirect(request.getContextPath() + "/paymentMethod");
     }
 }

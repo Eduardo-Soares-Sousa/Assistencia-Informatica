@@ -33,6 +33,7 @@
     }
 
     .container{
+        border-radius: 10px;
         max-height: 600px;
         overflow-y: auto;
     }

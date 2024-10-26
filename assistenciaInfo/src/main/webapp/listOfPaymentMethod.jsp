@@ -12,7 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-<title>Lista de Ordem de serviço - ITech.com</title>
+<title>Lista de Formas de Pagamento - ITech.com</title>
 <style>
     body{
         background: #201b2c;
@@ -33,9 +33,9 @@
     }
 
     .container{
-        border-radius: 10px;
+        margin-top: 500px;
         max-height: 600px;
-        max-width: 1500px;
+        max-width: 800px;
         overflow-y: auto;
     }
 
@@ -79,42 +79,26 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Data Emissão</th>
-                    <th scope="col">Data Finalização</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Forma Pagamento</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Observação</th>
-                    <th scope="col">Código do Cliente</th>
-                    <th scope="col">Nome do Cliente</th>
+                    <th scope="col">Nome</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-
+                    <th scope="col"></th>
                 </tr>
             </thead>
 
             <tbody>
-                <c:if test="${empty serviceOrders}">
+                <c:if test="${empty paymentMethods}">
                     <tr>
-                        <td colspan="10">Nenhuma ordem de serviço encontrada.</td>
+                        <td colspan="10">Nenhuma forma de pagamento encontrada.</td>
                     </tr>
                 </c:if>
-      	        <c:if test="${not empty serviceOrders}">
-    		        <c:forEach var="order" items="${serviceOrders}">
+      	        <c:if test="${not empty paymentMethods}">
+    		        <c:forEach var="payment" items="${paymentMethods}">
     		            <tr>
-    		                <th scope="row">${order.codigo}</th>
-    		                <td>${order.descricao}</td>
-    		                <td>${order.dataEmissao}</td>
-    		                <td>${order.dataFinalizacao}</td>
-    		                <td>${order.valor}</td>
-    		                <td>${order.paymentMethod.name}</td>
-    		                <td>${order.status.description}</td>
-    		                <td>${order.observacao}</td>
-    		                <td>${order.cliente.codigo}</td>
-    		                <td>${order.cliente.nome}</td>
-    		                <td><a href="deleteServiceOrder?codigo=${order.codigo}" class="btn btn-danger"> Excluir </a></td>
-          		            <td><a href="updateServiceOrder?codigo=${order.codigo}" class="btn btn-warning"> Editar </a></td>
+    		                <th scope="row">${payment.codigo}</th>
+    		                <td>${payment.name}</td>
+    		                <td><a href="deletePaymentMethod?codigo=${payment.codigo}" class="btn btn-danger"> Excluir </a></td>
+          		            <td><a href="updatePaymentMethod?codigo=${payment.codigo}" class="btn btn-warning"> Editar </a></td>
     		            </tr>
     		        </c:forEach>
     	        </c:if>
