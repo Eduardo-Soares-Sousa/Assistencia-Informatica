@@ -372,7 +372,7 @@ header{
                     <div class="input-box">
                         <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
                         <input type="text" name="complemento" id="complemento">
-                        <label for="complemento">Complemento*</label>
+                        <label for="complemento">Complemento</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="business-outline"></ion-icon></span>

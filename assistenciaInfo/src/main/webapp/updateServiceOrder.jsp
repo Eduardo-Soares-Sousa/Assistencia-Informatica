@@ -15,83 +15,103 @@
     <title>Update Service Order - ITech.com</title>
 </head>
 <style>
-body{
-    background: url('img/teste.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
-}
+    body{
+        background: url('img/teste.jpg') no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
 
-.btn{
-    background: #696969;
-    color: #fff;
-}
+    .btn{
+        background: #696969;
+        color: #fff;
+    }
 
-.btn:hover{
-    background: #a9a9a9;
-}
+    .btn:hover{
+        background: #a9a9a9;
+    }
 
-.select .select-payment{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-    overflow: hidden;
-    border: none;
-    background: #696969;
-    color: #fff;
-    appearance: none;
-    padding-left: 10px;
-    z-index: 999;
-}
+    .navegation .btnLogin-popup{
+        margin-left: 40px;
+        font-size: 1.1em;
+        font-weight: 500;
+        width: 130px;
+        height: 50px;
+        background: transparent;
+        border: 2px solid white;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+        transition: .5s;
+    }
 
-.label-payment {
-    position: absolute;
-    top: 30%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: #fff;
-    font-weight: 500;
-    pointer-events: none;
-    transition: .5s;
-}
+    .navegation .btnLogin-popup:hover{
+        background: white;
+        color: #162938;
+    }
 
-.select-payment:focus~.label-payment,
-.select-payment:not(:placeholder-shown)~.label-payment {
-    top: -10px;
-}
+    .select .select-payment{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        cursor: pointer;
+        overflow: hidden;
+        border: none;
+        background: #696969;
+        color: #fff;
+        appearance: none;
+        padding-left: 10px;
+        z-index: 999;
+    }
 
-.input-box.select {
-    padding-bottom: 5px;
-}
+    .label-payment {
+        position: absolute;
+        top: 30%;
+        left: 5px;
+        transform: translateY(-50%);
+        font-size: 1em;
+        color: #fff;
+        font-weight: 500;
+        pointer-events: none;
+        transition: .5s;
+    }
 
-.select .icon{
-    cursor: pointer;
-    top: -2px;
-}
+    .select-payment:focus~.label-payment,
+    .select-payment:not(:placeholder-shown)~.label-payment {
+        top: -10px;
+    }
 
-.wrapper{
-    transition: opacity 0.5s ease;
-    top: 20px;
-    height: 720px;
-}
+    .input-box.select {
+        padding-bottom: 5px;
+    }
 
-.form-box.register {
-    max-height: 600px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-}
+    .select .icon{
+        cursor: pointer;
+        top: -2px;
+    }
 
-.alerts-container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    z-index: 100;
-}
+    .wrapper{
+        transition: opacity 0.5s ease;
+        top: 20px;
+        height: 720px;
+    }
+
+    .form-box.register {
+        max-height: 600px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+    }
+
+    .alerts-container {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        z-index: 100;
+    }
 </style>
 <body>
 <div class="alerts-container">
@@ -139,10 +159,10 @@ body{
                 <div class="input-box select">
                     <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
                     <select class="select-payment" name="formaPagamento" id="formaPagamento" required value="${service.paymentMethod}">
-                        <option value="1" <c:if test="${service.paymentMethod.getCode() == '1'}">selected</c:if>>Á vista</option>
-                        <option value="2" <c:if test="${service.paymentMethod.getCode() == '2'}">selected</c:if>>Cartão de crédito</option>
-                        <option value="3" <c:if test="${service.paymentMethod.getCode() == '3'}">selected</c:if>>Cartão de débito</option>
-                        <option value="4" <c:if test="${service.paymentMethod.getCode() == '4'}">selected</c:if>>Pix</option>
+                        <option value="">Selecione</option>
+                        <c:forEach var="method" items="${paymentMethods}">
+                            <option value="${method.codigo}" <c:if test="${method.codigo == service.paymentMethod.codigo}">selected</c:if>>${method.name}</option>
+                        </c:forEach>
                     </select> <span id="5"></span>
                     <label class="label-payment" for="formaPagamento">Forma de Pagamento*</label>
                 </div>
@@ -154,15 +174,15 @@ body{
                             <option value="${cliente.codigo}" <c:if test="${cliente.codigo == service.cliente.codigo}">selected</c:if>>${cliente.nome}</option>
                         </c:forEach>
                     </select> <span id="6"></span>
-                    <label class="label-payment" for="formaPagamento">Forma de Pagamento*</label>
+                    <label class="label-payment" for="clienteId">Cliente*</label>
                 </div>
                 <div class="input-box select">
                     <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
-                    <select class="select-payment" name="status" id="status" required value="${service.status}">
-                        <option value="EMAPROVACAO" <c:if test="${service.status == 'EMAPROVACAO'}">selected</c:if>>Em aprovação</option>
-                        <option value="APROVADA" <c:if test="${service.status == 'APROVADA'}">selected</c:if>>Aprovada</option>
-                        <option value="EMANDAMENTO" <c:if test="${service.status == 'EMANDAMENTO'}">selected</c:if>>Em andamento</option>
-                        <option value="FINALIZADA" <c:if test="${service.status == 'FINALIZADA'}">selected</c:if>>Finalizada</option>
+                    <select class="select-payment" name="status" id="status" required>
+                        <option value="">Selecione</option>
+                        <c:forEach var="status" items="${statuses}">
+                            <option value="${status.code}" <c:if test="${status.code.equals(service.status.code)}">selected</c:if>>${status.description}</option>
+                        </c:forEach>
                     </select> <span id="7"></span>
                     <label class="label-payment" for="status">Status do serviço*</label>
                 </div>

@@ -74,17 +74,26 @@ public class PaymentMethodDao {
     }
 
     public boolean deletePaymentMethod(PaymentMethod paymentMethod) {
-        String sql = "delete from formapagamento where codigo=?";
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)){
-            ps.setLong(1, paymentMethod.getCodigo());
-            ps.executeUpdate();
+        String updateServiceSql = "update service set formapagamento=NULL where formapagamento=?";
+        String deletePaymentMethodSql = "delete from formapagamento where codigo=?";
 
+        try(Connection connection = dataSource.getConnection()){
+            connection.setAutoCommit(false);
+
+            try(PreparedStatement psUpdate = connection.prepareStatement(updateServiceSql)){
+                psUpdate.setLong(1, paymentMethod.getCodigo());
+                psUpdate.executeUpdate();
+            }
+
+            try(PreparedStatement psDelete = connection.prepareStatement(deletePaymentMethodSql)){
+                psDelete.setLong(1, paymentMethod.getCodigo());
+                psDelete.executeUpdate();
+            }
+
+            connection.commit();
             return true;
         }catch(SQLException e){
             throw new RuntimeException("Erro durante a consulta no BD", e);
         }
     }
-
-
 }

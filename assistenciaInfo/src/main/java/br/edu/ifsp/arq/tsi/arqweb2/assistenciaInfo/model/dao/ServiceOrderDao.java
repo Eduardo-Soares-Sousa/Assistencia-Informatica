@@ -116,8 +116,7 @@ public class ServiceOrderDao {
         String sql = "SELECT s.*, c.nome AS cliente_nome, p.nome AS forma_pagamento_nome " +
                     "FROM service s " +
                     "JOIN cliente c ON s.cliente_id = c.codigo " +
-                    "JOIN formapagamento p ON s.formaPagamento = p.codigo " +
-                    "ORDER BY s.dataEmissao";
+                    "LEFT JOIN formapagamento p ON s.formaPagamento = p.codigo ";
         List<ServiceOrder> serviceOrders = new ArrayList<>();
 
         try(Connection connection = dataSource.getConnection();

@@ -36,6 +36,13 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         List<Cliente> clientes = clienteDao.getAllClientes();
         request.setAttribute("clientes", clientes);
 
+        PaymentMethodDao paymentMethodDao = new PaymentMethodDao(DataSourceSearcher.getInstance().getDataSource());
+        List<PaymentMethod> paymentMethods = paymentMethodDao.getAllPaymentMethod();
+        request.setAttribute("paymentMethods", paymentMethods);
+
+        Status[] statuses = Status.values();
+        request.setAttribute("statuses", statuses);
+
         String url = "/updateServiceOrder.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
