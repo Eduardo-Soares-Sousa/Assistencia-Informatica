@@ -57,4 +57,3 @@ SELECT * FROM cliente;
 SELECT * FROM endereco;
 SELECT * FROM formapagamento;
 SELECT * FROM service;
-

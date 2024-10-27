@@ -40,8 +40,7 @@ public class UpdateServiceOrderServlet extends HttpServlet {
         List<PaymentMethod> paymentMethods = paymentMethodDao.getAllPaymentMethod();
         request.setAttribute("paymentMethods", paymentMethods);
 
-        Status[] statuses = Status.values();
-        request.setAttribute("statuses", statuses);
+        request.setAttribute("StatusValues", Status.values());
 
         String url = "/updateServiceOrder.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);

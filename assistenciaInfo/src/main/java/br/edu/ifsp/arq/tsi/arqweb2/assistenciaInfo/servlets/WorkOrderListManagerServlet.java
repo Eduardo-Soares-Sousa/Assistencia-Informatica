@@ -3,6 +3,7 @@ package br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.servlets;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Cliente;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Employee;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.ServiceOrder;
+import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.Status;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.model.dao.ServiceOrderDao;
 import br.edu.ifsp.arq.tsi.arqweb2.assistenciaInfo.utils.DataSourceSearcher;
 import jakarta.servlet.RequestDispatcher;
@@ -36,6 +37,10 @@ public class WorkOrderListManagerServlet extends HttpServlet {
             List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceOrder();
             request.setAttribute("serviceOrders", serviceOrders);
         }
+
+        Status[] statuses = Status.values();
+        request.setAttribute("statuses", statuses);
+        request.setAttribute("StatusValues", Status.values());
 
         String url = "/listOfWorkOrders.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);

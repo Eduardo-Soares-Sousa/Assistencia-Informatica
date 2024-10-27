@@ -153,4 +153,17 @@ public class ServiceOrderDao {
         }
         return serviceOrders;
     }
+
+    public boolean updateServiceOrderStatus(Long codigo, int statusCode) {
+        String sql = "UPDATE service SET estado = ? WHERE codigo = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, statusCode);
+            ps.setLong(2, codigo);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar status da ordem de serviço no BD", e);
+        }
+    }
 }

@@ -179,9 +179,11 @@
                 <div class="input-box select">
                     <span class="icon"><ion-icon name="chevron-down-outline"></ion-icon></span>
                     <select class="select-payment" name="status" id="status" required>
-                        <option value="">Selecione</option>
-                        <c:forEach var="status" items="${statuses}">
-                            <option value="${status.code}" <c:if test="${status.code.equals(service.status.code)}">selected</c:if>>${status.description}</option>
+                        <c:forEach var="statusOption" items="${StatusValues}">
+                            <option value="${statusOption.code}"
+                                ${statusOption.code == service.status.code ? 'selected' : ''}>
+                                ${statusOption.description}
+                            </option>
                         </c:forEach>
                     </select> <span id="7"></span>
                     <label class="label-payment" for="status">Status do serviço*</label>

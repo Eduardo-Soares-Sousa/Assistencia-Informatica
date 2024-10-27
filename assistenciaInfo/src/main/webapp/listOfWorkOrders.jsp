@@ -35,7 +35,7 @@
     .container{
         border-radius: 10px;
         max-height: 600px;
-        max-width: 1500px;
+        max-width: 1600px;
         overflow-y: auto;
     }
 
@@ -89,6 +89,7 @@
                     <th scope="col">Código do Cliente</th>
                     <th scope="col">Nome do Cliente</th>
                     <th scope="col"></th>
+                    <th scope="col">Ações</th>
                     <th scope="col"></th>
 
                 </tr>
@@ -109,12 +110,24 @@
     		                <td>${order.dataFinalizacao}</td>
     		                <td>${order.valor}</td>
     		                <td>${order.paymentMethod.name}</td>
-    		                <td>${order.status.description}</td>
+                            <td>
+                                <form id="formStatus${order.codigo}" action="updateStatus" method="post">
+                                    <input type="hidden" name="codigo" value="${order.codigo}" />
+                                    <select name="status" class="form-select">
+                                        <c:forEach var="statusOption" items="${StatusValues}">
+                                            <option value="${statusOption.code}" ${statusOption.code == order.status.code ? 'selected' : ''}>
+                                                ${statusOption.description}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </form>
+                            </td>
     		                <td>${order.observacao}</td>
     		                <td>${order.cliente.codigo}</td>
     		                <td>${order.cliente.nome}</td>
     		                <td><a href="deleteServiceOrder?codigo=${order.codigo}" class="btn btn-danger"> Excluir </a></td>
           		            <td><a href="updateServiceOrder?codigo=${order.codigo}" class="btn btn-warning"> Editar </a></td>
+          		            <td><button onclick="document.getElementById('formStatus${order.codigo}').submit();" class="btn btn-success">Salvar</button></td>
     		            </tr>
     		        </c:forEach>
     	        </c:if>
