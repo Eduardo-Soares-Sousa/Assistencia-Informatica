@@ -11,7 +11,7 @@
     	rel="stylesheet"
     	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
     	crossorigin="anonymous">
-    <title>Adicionar Forma de Pagamento - ITech.com</title>
+    <title>Editar Forma de Pagamento - ITech.com</title>
 </head>
 <style>
     body{
@@ -306,7 +306,7 @@
 </style>
 <body>
 <div class="alerts-container">
-    <c:if test="${result == 'notRegistered'}">
+    <c:if test="${result == 'notUpdated'}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
     	    Não foi possível editar a forma de pagamento :(.
     		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -334,46 +334,16 @@
                 <ion-icon name="close"></ion-icon>
             </span>
             <div class="form-box register">
-                <h2>Adicionar Método de Pagamento</h2>
-                <form action="paymentMethod" method="post">
+                <h2>Editar Método de Pagamento</h2>
+                <form action="updatePaymentMethod" method="post">
+                    <input type="hidden" name="codigo" value="${payment.codigo}">
                     <div class="input-box">
-                        <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
-                        <input type="text" name="method" id="method" minlength="2" maxlength="100" required> <span id="1"></span>
-                        <label for="method">Novo método*</label>
+                        <input type="text" name="name" id="name" value="${payment.name}" minlength="2" maxlength="100" required>
+                        <label for="name">Nome da Forma de Pagamento*</label>
                     </div>
                     <button type="submit" class="btn-salvar">Salvar</button>
                 </form>
             </div>
-        </div>
-        <div class="container" id="container">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <c:if test="${empty paymentMethods}">
-                        <tr>
-                            <td colspan="10">Nenhuma forma de pagamento encontrada.</td>
-                        </tr>
-                    </c:if>
-                    <c:if test="${not empty paymentMethods}">
-                        <c:forEach var="payment" items="${paymentMethods}">
-                            <tr>
-                                <th scope="row">${payment.codigo}</th>
-                                <td>${payment.name}</td>
-                                <td><a href="deletePaymentMethod?codigo=${payment.codigo}" class="btn btn-danger"> Excluir </a></td>
-                                <td><a href="updatePaymentMethod?codigo=${payment.codigo}" class="btn btn-warning"> Editar </a></td>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                </tbody>
-            </table>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

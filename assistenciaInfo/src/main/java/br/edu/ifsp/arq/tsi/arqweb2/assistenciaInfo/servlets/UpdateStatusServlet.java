@@ -26,7 +26,7 @@ public class UpdateStatusServlet extends HttpServlet {
         ServiceOrderDao serviceOrderDao = new ServiceOrderDao(DataSourceSearcher.getInstance().getDataSource());
 
         if (serviceOrderDao.updateServiceOrderStatus(codigo, statusCode)) {
-            response.sendRedirect("workOrderListManager");
+            getServletContext().getRequestDispatcher("/workOrderListManager").forward(request, response);
         } else {
             request.setAttribute("result", "registered");
         }

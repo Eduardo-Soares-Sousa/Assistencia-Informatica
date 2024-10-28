@@ -27,7 +27,7 @@ public class PaymentMethodDao {
             ps.executeUpdate();
 
             return true;
-        }catch(SQLException e) {
+        }catch(SQLException e){
             throw new RuntimeException("Erro durante a escrita no BD (forma de pagamento)", e);
         }
     }
@@ -91,6 +91,39 @@ public class PaymentMethodDao {
             }
 
             connection.commit();
+            return true;
+        }catch(SQLException e){
+            throw new RuntimeException("Erro durante a consulta no BD", e);
+        }
+    }
+
+    public PaymentMethod getPaymentMethodByCode(int codigo) {
+        PaymentMethod paymentMethod = null;
+        String sql = "SELECT * FROM formapagamento WHERE codigo = ?";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1, codigo);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                paymentMethod = new PaymentMethod();
+                paymentMethod.setCodigo(resultSet.getInt("codigo"));
+                paymentMethod.setName(resultSet.getString("nome"));
+            }
+        }catch(SQLException e){
+            throw new RuntimeException("Erro durante a consulta no BD", e);
+        }
+        return paymentMethod;
+    }
+
+    public boolean updatePaymentMethod(PaymentMethod paymentMethod) {
+        String sql = "UPDATE formapagamento SET nome=? WHERE codigo=?";
+        try(Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, paymentMethod.getName());
+            ps.setInt(2, paymentMethod.getCodigo());
+
+            ps.executeUpdate();
             return true;
         }catch(SQLException e){
             throw new RuntimeException("Erro durante a consulta no BD", e);
