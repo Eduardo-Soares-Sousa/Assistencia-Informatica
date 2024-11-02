@@ -103,7 +103,7 @@ public class ServiceOrderServlet extends HttpServlet {
         List<ServiceOrder> serviceOrders = serviceOrderDao.getServiceOrder();
         request.setAttribute("serviceOrders", serviceOrders);
 
-        url = "/listOfWorkOrders.jsp";
+        url = "/workOrderListManager";
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);

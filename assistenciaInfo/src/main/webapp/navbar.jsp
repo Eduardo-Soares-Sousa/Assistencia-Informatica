@@ -6,6 +6,7 @@
             <a href="workOrderListManager">Order List</a>
             <a href="clientList">Client List</a>
             <a href="paymentMethod">Payment Method</a>
-            <button class="btnLogin-popup" onclick="registerForm()">Register</button>
+            <a href="logoutEmployee">Logout</a>
+            <button class="btnLogin-popup" onclick="registerForm()">Client</button>
         </nav>
 </header>
