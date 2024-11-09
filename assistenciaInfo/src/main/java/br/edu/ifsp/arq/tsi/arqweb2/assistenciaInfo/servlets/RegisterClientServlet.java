@@ -22,8 +22,6 @@ public class RegisterClientServlet extends HttpServlet {
         super();
     }
 
-
-
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nome = request.getParameter("name");
